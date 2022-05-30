@@ -11,7 +11,7 @@ function App() {
 
   const getRemainingDays = () => {
     const date1 = new Date();
-    const date2 = new Date('11/04/2022');
+    const date2 = new Date('14/08/2022');
     const diffTime = Math.abs(date2 - date1);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     return diffDays;
@@ -35,7 +35,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-       <p> Faltan { getRemainingDays() } dias </p>
+       <p> Faltan { getRemainingDays() } días </p>
         <img src={getPokemonImg()} className="App-logo" alt="logo" />
         <p>{ pokemon?.name?.toUpperCase() || 'Cargando...' }</p>
       </header>
