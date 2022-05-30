@@ -1,11 +1,13 @@
 import './App.css';
 import { useEffect, useState } from 'react';
+import pokeball from './icons8-pokeball-48.png';
+
 
 function App() {
 
   const [pokemon, setPokemon] = useState('');
 
-  const pokeApiUrl = ' https://pokeapi.co/api/v2/pokemon/';
+  const pokeApiUrl = 'https://pokeapi.co/api/v2/pokemon/';
 
   const getRemainingDays = () => {
     const date1 = new Date();
@@ -16,7 +18,7 @@ function App() {
   }
 
   const getPokemonImg = () => {
-    return pokemon?.sprites?.front_default;
+    return pokemon?.sprites?.front_default || pokeball;
   }
 
   useEffect(() => {
@@ -24,16 +26,18 @@ function App() {
     fetch(`${ pokeApiUrl }${ days }`)
       .then((response) => response.json())
       .then((poke) => {
-        setPokemon(poke)
+        setTimeout(() => {
+          setPokemon(poke)
+        }, 1500);
       });
   }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-        Faltan { getRemainingDays() } dias
-        <img src={ getPokemonImg() } className="App-logo" alt="logo" />
-        <p>{ pokemon?.name?.toUpperCase() }</p>
+       <p> Faltan { getRemainingDays() } dias </p>
+        <img src={getPokemonImg()} className="App-logo" alt="logo" />
+        <p>{ pokemon?.name?.toUpperCase() || 'Cargando...' }</p>
       </header>
     </div>
   );
